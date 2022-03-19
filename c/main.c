@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define ATTEMPTS  1000000
+#define ATTEMPTS  100
 
 int dice[6] = {4, 6, 8, 10, 12, 20};
 
@@ -11,12 +11,16 @@ int throwRandom(int faces) {
 
 int roll() {
     int tries = 0;
-    for (int i = 0; i < 6; i++) {
+    int i = 0;
+    while (i < 6) {
         int found = 0;
         while (found == 0 ) {
             tries++;
             if (throwRandom(dice[i]) == dice[i] - 1) {
                 found = 1;
+                i = i + 1;
+            } else {
+                i = 0;
             }
         }
     }
@@ -50,7 +54,7 @@ int main() {
     double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
 
     printf("min: %d, max: %d, avg: %f, total: %d \n", min, max, avg, total);
-    printf("Time: %f sec\n", time_spent);
+    printf("Time: %f ms\n", time_spent * 1000);
     return 0;
 
 }

@@ -1,4 +1,4 @@
-ATTEMPTS = 1000000
+ATTEMPTS = 100 
 dice = {4, 6, 8, 10, 12, 20}
 
 function throwRandom(faces)
@@ -7,12 +7,14 @@ end
 
 function roll()
     tries = 0
-    for i = 1, 6 do
+    i = 1
+    while i <= 6 do
         found = false
         while not found do
             tries = tries + 1
             if throwRandom(dice[i]) == dice[i] then
                 found = true
+                i = i + 1
             else
                 i = 1
             end

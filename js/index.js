@@ -3,7 +3,7 @@ const { hrtime } = require('process');
 
 
 
-const MAX_ROLLS = 1_000_000;
+const MAX_ROLLS = 100;
 function throwRandom(faces) {
 	return Math.floor(Math.random()*faces);
 }
@@ -19,9 +19,11 @@ function roll() {
         while (!found) {
             tries++;
             const t = throwRandom(dice[i])
-           if (t === dice[i] -1) {
-            found = true;
-            }  
+            if (t === dice[i] -1) {
+                found = true;
+            } else {
+                i = 0;
+            }
         }
     }
     return tries;

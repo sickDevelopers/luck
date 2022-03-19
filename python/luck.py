@@ -2,20 +2,25 @@ import random
 import time
 
 dice = [4, 6, 8, 10, 12, 20]
-ATTEMPTS = 1000000
+ATTEMPTS = 100
 
 def throw_random(faces):
-    return int(faces * random.random())
+    l = int(faces * random.random()) + 1
+    return l
 
 def roll(): 
     tries = 0
-    for d in dice:
+    i = 0
+    while i < len(dice):
         found = False
         while found == False :
             tries = tries + 1
-            x = throw_random(d)
-            if x == d - 1:
+            x = throw_random(dice[i])
+            if x == dice[i]:
                 found = True
+                i = i + 1
+            else:
+                i = 0        
     return tries
 
 def main():
@@ -34,5 +39,5 @@ def main():
         avg = total / x
 
     print('min: {0}, max: {1}, avg: {2}, total: {3}'.format(minimum, maximum, avg, total))
-    print('Execution time: %ss' % (time.time() - start_time))
+    print('Execution time: %ss' % ((time.time() - start_time) * 1000))
 main()
